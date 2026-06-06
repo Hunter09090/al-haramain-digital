@@ -1,49 +1,28 @@
-/**
- * Al-Haramain Model Madrasah - Main Script
- */
-
 // ১. হেডার, ফুটার এবং অন্যান্য পেজ লোড করার ফাংশন
 function loadComponent(id, file) {
     fetch(file)
-        .then(response => {
-            if (response.ok) return response.text();
-            throw new Error('File not found');
-        })
+        .then(response => response.text())
         .then(data => {
-            document.getElementById(id).innerHTML = data;
+            const el = document.getElementById(id);
+            if (el) el.innerHTML = data;
         })
-        .catch(err => console.error('Error loading ' + file, err));
+        .catch(err => console.error('Error:', err));
 }
 
-// ২. পেজ লোড হওয়ার সময় সব কম্পোনেন্ট লোড করা (সংশোধিত)
+// ২. অটো লোড
 window.onload = () => {
-    // হেডার ও ফুটার লোড
     loadComponent('header-container', 'header.html');
     loadComponent('footer-container', 'footer.html');
-
-    // হোম পেজে থাকলে বাণী এবং বিভাগসমূহ লোড করা
-    if (document.getElementById('bani-container')) {
-        loadComponent('bani-container', 'bani.html');
-    }
-    
-    // সংশোধিত লাইন: আইডি হলো 'departments-container' এবং ফাইল হলো 'departments.html'
-    if (document.getElementById('departments-container')) {
-        loadComponent('departments-container', 'departments.html'); 
-    }
+    loadComponent('bani-container', 'bani.html');
+    loadComponent('departments-container', 'departments.html');
 };
 
-// ৩. মেনু টগল করার ফাংশন
+// ৩. টগল ফাংশন (মেনু ও অ্যাকর্ডিয়ন)
 function toggleMenu() {
-    const menu = document.getElementById('mobile-menu');
-    if (menu) {
-        menu.classList.toggle('hidden');
-    }
+    document.getElementById('mobile-menu')?.classList.toggle('hidden');
 }
 
-// ৪. অ্যাকর্ডিয়ন (Accordion) খোলার ফাংশন
 function toggleAccordion(id) {
-    const element = document.getElementById(id);
-    if (element) {
-        element.classList.toggle('hidden');
-    }
+    const el = document.getElementById(id);
+    if (el) el.classList.toggle('hidden');
 }
