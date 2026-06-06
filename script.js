@@ -15,7 +15,7 @@ function loadComponent(id, file) {
         .catch(err => console.error('Error loading ' + file, err));
 }
 
-// ২. পেজ লোড হওয়ার সময় সব কম্পোনেন্ট লোড করা
+// ২. পেজ লোড হওয়ার সময় সব কম্পোনেন্ট লোড করা (সংশোধিত)
 window.onload = () => {
     // হেডার ও ফুটার লোড
     loadComponent('header-container', 'header.html');
@@ -25,8 +25,10 @@ window.onload = () => {
     if (document.getElementById('bani-container')) {
         loadComponent('bani-container', 'bani.html');
     }
+    
+    // সংশোধিত লাইন: আইডি হলো 'departments-container' এবং ফাইল হলো 'departments.html'
     if (document.getElementById('departments-container')) {
-        loadComponent('departments.html', 'departments.html');
+        loadComponent('departments-container', 'departments.html'); 
     }
 };
 
@@ -38,7 +40,7 @@ function toggleMenu() {
     }
 }
 
-// ৪. অ্যাকর্ডিয়ন (Accordion) খোলার ফাংশন - (যা আপনি বিস্তারিত দেখার জন্য চেয়েছেন)
+// ৪. অ্যাকর্ডিয়ন (Accordion) খোলার ফাংশন
 function toggleAccordion(id) {
     const element = document.getElementById(id);
     if (element) {
